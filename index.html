@@ -123,8 +123,8 @@
       <button type="submit">Send Request</button>
     </form>
 
-   <script>
-  // Capture UTMs from URL into hidden fields
+<script>
+  // Fill UTM hidden fields from URL
   const params = new URLSearchParams(window.location.search);
   ["utm_source","utm_medium","utm_campaign","utm_term","utm_content"].forEach(k => {
     const el = document.getElementById(k);
@@ -134,19 +134,19 @@
   // Also POST to your Google Sheet webhook (fire-and-forget)
   document.getElementById("leadForm").addEventListener("submit", function () {
     const data = Object.fromEntries(new FormData(this).entries());
-    const url = "https://script.google.com/macros/s/AKfycbxs5Mm2ALs_crOZ0e_lKgVER8Cqotu1xys-mYUjwrl0rg0C2jT7xCd_v2vZZtn7KWLX2w/exec";
+    const SHEET_WEBHOOK = "https://script.google.com/macros/s/AKfycbwvQpw2fjl098-h1guqwv42F-no4p9pNGe02U7kY3xjjn7zddQPqq0plb7oMAa_xaqh/exec";
     try {
-      // Most reliable while page navigates (no CORS preflight)
-      navigator.sendBeacon?.(url, new Blob([JSON.stringify(data)], { type: "application/json" })) 
-      || fetch(url, {
-           method: "POST",
-           headers: { "Content-Type": "application/json" },
-           body: JSON.stringify(data),
-           keepalive: true
-         });
-    } catch (_) {
-      /* no-op: your FormSubmit email still sends */
-    }
+      // Most reliable while the page navigates to thankyou.html
+      navigator.sendBeacon?.(
+        SHEET_WEBHOOK,
+        new Blob([JSON.stringify(data)], { type: "application/json" })
+      ) || fetch(SHEET_WEBHOOK, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+        keepalive: true
+      });
+    } catch (_) { /* no-op, FormSubmit email still goes through */ }
   });
 </script>
   </div>
