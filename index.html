@@ -99,29 +99,37 @@
     <h2 class="section-title">Request a Quote</h2>
     <p>Tell us about your project. You’ll get a fast response with scope, timeline, and pricing.</p>
 
-    <form id="leadForm" action="https://formsubmit.co/casey-morris@live.com" method="POST">
-      <!-- FormSubmit settings -->
-      <input type="hidden" name="_subject" value="New lead — PNW Electrical Engineering">
-      <input type="hidden" name="_template" value="table">
-      <input type="hidden" name="_captcha" value="false">
-      <input type="hidden" name="_next" value="https://pnwelectricalengineering.com/thankyou.html">
-      <input type="text" name="_honey" style="display:none">
+    <form id="leadForm" action="https://formsubmit.co/casey-morris@live.com" method="POST" autocomplete="on">
+  <!-- FormSubmit settings -->
+  <input type="hidden" name="_subject" value="New lead — PNW Electrical Engineering">
+  <input type="hidden" name="_template" value="table">
+  <input type="hidden" name="_captcha" value="false">
+  <input type="hidden" name="_next" value="https://pnwelectricalengineering.com/thankyou.html">
+  <input type="text" name="_honey" style="display:none">
 
-      <!-- Visible fields -->
-      <label>Name <input name="Name" required></label>
-      <label>Email <input type="email" name="Email" required></label>
-      <label>Phone <input name="Phone"></label>
-      <label>Notes <textarea name="Notes"></textarea></label>
+  <!-- Visible fields -->
+  <label>Name
+    <input name="Name" required autocomplete="name">
+  </label>
+  <label>Email
+    <input type="email" name="email" required autocomplete="email">
+  </label>
+  <label>Phone
+    <input name="Phone" inputmode="tel" autocomplete="tel">
+  </label>
+  <label>Notes
+    <textarea name="Notes" rows="4" autocomplete="off"></textarea>
+  </label>
 
-      <!-- Hidden UTM capture fields -->
-      <input type="hidden" id="utm_source" name="utm_source">
-      <input type="hidden" id="utm_medium" name="utm_medium">
-      <input type="hidden" id="utm_campaign" name="utm_campaign">
-      <input type="hidden" id="utm_term" name="utm_term">
-      <input type="hidden" id="utm_content" name="utm_content">
+  <!-- Hidden UTM capture fields -->
+  <input type="hidden" id="utm_source" name="utm_source">
+  <input type="hidden" id="utm_medium" name="utm_medium">
+  <input type="hidden" id="utm_campaign" name="utm_campaign">
+  <input type="hidden" id="utm_term" name="utm_term">
+  <input type="hidden" id="utm_content" name="utm_content">
 
-      <button type="submit">Send Request</button>
-    </form>
+  <button type="submit">Send Request</button>
+</form>
 
 <script>
   // Fill UTM hidden fields from URL
@@ -136,7 +144,6 @@
     const data = Object.fromEntries(new FormData(this).entries());
     const SHEET_WEBHOOK = "https://script.google.com/macros/s/AKfycbwvQpw2fjl098-h1guqwv42F-no4p9pNGe02U7kY3xjjn7zddQPqq0plb7oMAa_xaqh/exec";
     try {
-      // Most reliable while the page navigates to thankyou.html
       navigator.sendBeacon?.(
         SHEET_WEBHOOK,
         new Blob([JSON.stringify(data)], { type: "application/json" })
@@ -156,5 +163,6 @@
   <div class="container footer-wrap">
     <p><strong>PNW Electrical Engineering, PLLC</strong> — Licensed Professional Engineer (WA). Website: <a href="https://pnwengineer.com">pnwengineer.com</a></p>
     <p class="fine">© 2025 PNW Electrical Engineering, PLLC. All rights reserved.</p>
+    <a href="tel:+14437427054">Call: (443) 742-7054</a>
   </div>
 </footer>
