@@ -94,57 +94,64 @@
       </div>
     </section>
 
-    <section id="contact" class="section">
-      <div class="container">
-        <h2 class="section-title">Request a Quote</h2>
-        <p>Tell us about your project. You’ll get a fast response with scope, timeline, and pricing.</p>
-<form id="leadForm" action="https://formsubmit.co/casey-morris@live.com" method="POST">
-  <!-- FormSubmit settings -->
-  <input type="hidden" name="_subject" value="New lead — PNW Electrical Engineering">
-  <input type="hidden" name="_template" value="table">
-  <input type="hidden" name="_captcha" value="false">
-  <input type="hidden" name="_next" value="https://pnwelectricalengineering.com/thankyou.html">
-  <input type="text" name="_honey" style="display:none">
+<section id="contact" class="section">
+  <div class="container">
+    <h2 class="section-title">Request a Quote</h2>
+    <p>Tell us about your project. You’ll get a fast response with scope, timeline, and pricing.</p>
 
-  <!-- Visible fields -->
-  <label>Name <input name="Name" required></label>
-  <label>Email <input type="email" name="Email" required></label>
-  <label>Phone <input name="Phone"></label>
-  <label>Notes <textarea name="Notes"></textarea></label>
+    <form id="leadForm" action="https://formsubmit.co/casey-morris@live.com" method="POST">
+      <!-- FormSubmit settings -->
+      <input type="hidden" name="_subject" value="New lead — PNW Electrical Engineering">
+      <input type="hidden" name="_template" value="table">
+      <input type="hidden" name="_captcha" value="false">
+      <input type="hidden" name="_next" value="https://pnwelectricalengineering.com/thankyou.html">
+      <input type="text" name="_honey" style="display:none">
 
-  <!-- Hidden UTM capture fields -->
-  <input type="hidden" id="utm_source" name="utm_source">
-  <input type="hidden" id="utm_medium" name="utm_medium">
-  <input type="hidden" id="utm_campaign" name="utm_campaign">
-  <input type="hidden" id="utm_term" name="utm_term">
-  <input type="hidden" id="utm_content" name="utm_content">
+      <!-- Visible fields -->
+      <label>Name <input name="Name" required></label>
+      <label>Email <input type="email" name="Email" required></label>
+      <label>Phone <input name="Phone"></label>
+      <label>Notes <textarea name="Notes"></textarea></label>
 
-  <button type="submit">Send Request</button>
-</form>
+      <!-- Hidden UTM capture fields -->
+      <input type="hidden" id="utm_source" name="utm_source">
+      <input type="hidden" id="utm_medium" name="utm_medium">
+      <input type="hidden" id="utm_campaign" name="utm_campaign">
+      <input type="hidden" id="utm_term" name="utm_term">
+      <input type="hidden" id="utm_content" name="utm_content">
 
-<script>
-  // Capture UTMs from URL
-  const params = new URLSearchParams(window.location.search);
-  ["utm_source","utm_medium","utm_campaign","utm_term","utm_content"].forEach(k => {
-    const el = document.getElementById(k);
-    if (el && params.has(k)) el.value = params.get(k);
-  });
+      <button type="submit">Send Request</button>
+    </form>
 
-  // Duplicate submit to Google Sheet webhook
-  document.getElementById("leadForm").addEventListener("submit", function() {
-    const data = Object.fromEntries(new FormData(this).entries());
-    fetch("YOUR_WEB_APP_URL", {
-      method: "POST",
-      body: JSON.stringify(data)
-    });
-  });
-<script>
+    <script>
+      // Capture UTMs from URL into hidden fields
+      const params = new URLSearchParams(window.location.search);
+      ["utm_source","utm_medium","utm_campaign","utm_term","utm_content"].forEach(k => {
+        const el = document.getElementById(k);
+        if (el && params.has(k)) el.value = params.get(k);
+      });
 
-  <footer class="site-footer">
-    <div class="container footer-wrap">
-      <p><strong>PNW Electrical Engineering, PLLC</strong> — Licensed Professional Engineer (WA). Website: <a href="https://pnwengineer.com">pnwengineer.com</a></p>
-      <p class="fine">© 2025 PNW Electrical Engineering, PLLC. All rights reserved.</p>
-    </div>
-  </footer>
-</body>
-</html>
+      // Also POST to Google Sheet webhook (won’t block the FormSubmit redirect)
+      document.getElementById("leadForm").addEventListener("submit", function () {
+        const data = Object.fromEntries(new FormData(this).entries());
+        try {
+          fetch("YOUR_WEB_APP_URL", {
+            method: "POST",
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify(data),
+            keepalive: true  // helps finish even if the page navigates
+          });
+        } catch (e) {
+          // no-op: email still goes through via FormSubmit
+        }
+      });
+    </script>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container footer-wrap">
+    <p><strong>PNW Electrical Engineering, PLLC</strong> — Licensed Professional Engineer (WA). Website: <a href="https://pnwengineer.com">pnwengineer.com</a></p>
+    <p class="fine">© 2025 PNW Electrical Engineering, PLLC. All rights reserved.</p>
+  </div>
+</footer>
