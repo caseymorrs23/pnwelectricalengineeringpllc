@@ -99,29 +99,23 @@
     <h2 class="section-title">Request a Quote</h2>
     <p>Tell us about your project. You’ll get a fast response with scope, timeline, and pricing.</p>
 
-    <form id="leadForm" action="https://formsubmit.co/casey-morris@live.com" method="POST" autocomplete="on">
-  <!-- FormSubmit settings -->
+<form id="leadForm" autocomplete="on">
+  <!-- FormSubmit controls (still used in the AJAX payload) -->
   <input type="hidden" name="_subject" value="New lead — PNW Electrical Engineering">
   <input type="hidden" name="_template" value="table">
   <input type="hidden" name="_captcha" value="false">
-  <input type="hidden" name="_next" value="https://pnwelectricalengineering.com/thankyou.html">
-  <input type="text" name="_honey" style="display:none">
+
+  <!-- Hardened honeypot -->
+  <input type="text" name="_honey" aria-hidden="true" tabindex="-1" autocomplete="off"
+         style="position:absolute; left:-9999px; top:auto; width:1px; height:1px; opacity:0;">
 
   <!-- Visible fields -->
-  <label>Name
-    <input name="Name" required autocomplete="name">
-  </label>
-  <label>Email
-    <input type="email" name="email" required autocomplete="email">
-  </label>
-  <label>Phone
-    <input name="Phone" inputmode="tel" autocomplete="tel">
-  </label>
-  <label>Notes
-    <textarea name="Notes" rows="4" autocomplete="off"></textarea>
-  </label>
+  <label>Name <input name="Name" required autocomplete="name"></label>
+  <label>Email <input type="email" name="email" required autocomplete="email"></label>
+  <label>Phone <input name="Phone" inputmode="tel" autocomplete="tel"></label>
+  <label>Notes <textarea name="Notes" rows="4"></textarea></label>
 
-  <!-- Hidden UTM capture fields -->
+  <!-- UTM hidden fields -->
   <input type="hidden" id="utm_source" name="utm_source">
   <input type="hidden" id="utm_medium" name="utm_medium">
   <input type="hidden" id="utm_campaign" name="utm_campaign">
@@ -132,28 +126,64 @@
 </form>
 
 <script>
-  // Fill UTM hidden fields from URL
+  // 1) Fill UTM fields from URL
   const params = new URLSearchParams(window.location.search);
-  ["utm_source","utm_medium","utm_campaign","utm_term","utm_content"].forEach(k => {
+  ["utm_source","utm_medium","utm_campaign","utm_term","utm_content"].forEach(k=>{
     const el = document.getElementById(k);
     if (el && params.has(k)) el.value = params.get(k);
   });
 
-  // Also POST to your Google Sheet webhook (fire-and-forget)
-  document.getElementById("leadForm").addEventListener("submit", function () {
-    const data = Object.fromEntries(new FormData(this).entries());
-    const SHEET_WEBHOOK = "https://script.google.com/macros/s/AKfycbwvQpw2fjl098-h1guqwv42F-no4p9pNGe02U7kY3xjjn7zddQPqq0plb7oMAa_xaqh/exec";
+  // 2) AJAX submit to both endpoints, with console diagnostics
+  const FORM_EMAIL    = "casey-morris@live.com"; // Make sure you clicked FormSubmit’s confirmation email once
+  const SHEET_WEBHOOK = "https://script.google.com/macros/s/AKfycbwvQpw2fjl098-h1guqwv42F-no4p9pNGe02U7kY3xjjn7zddQPqq0plb7oMAa_xaqh/exec";
+  const THANK_YOU_URL = "https://pnwelectricalengineering.com/thankyou.html";
+
+  function postJSON(url, data) {
+    return fetch(url, {
+      method: "POST",
+      headers: { "Content-Type": "application/json", "Accept": "application/json" },
+      body: JSON.stringify(data)
+    });
+  }
+
+  document.getElementById("leadForm").addEventListener("submit", async (e)=>{
+    e.preventDefault();
+    const data = Object.fromEntries(new FormData(e.currentTarget).entries());
+
+    // If honeypot is filled, quietly stop (treat as spam)
+    if (data._honey && data._honey.trim() !== "") {
+      console.warn("Honeypot filled; spam blocked.");
+      return; // do nothing
+    }
+
+    // A) Email via FormSubmit (AJAX endpoint)
+    const fs = postJSON(`https://formsubmit.co/ajax/${encodeURIComponent(FORM_EMAIL)}`, data)
+      .then(r => ({ok: r.ok, status: r.status}))
+      .catch(err => ({ok:false, err:String(err)}));
+
+    // B) Log to Google Sheet (use sendBeacon first; fallback to JSON POST)
+    let sheetOK = false;
     try {
-      navigator.sendBeacon?.(
+      sheetOK = !!(navigator.sendBeacon && navigator.sendBeacon(
         SHEET_WEBHOOK,
-        new Blob([JSON.stringify(data)], { type: "application/json" })
-      ) || fetch(SHEET_WEBHOOK, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data),
-        keepalive: true
-      });
-    } catch (_) { /* no-op, FormSubmit email still goes through */ }
+        new Blob([JSON.stringify(data)], {type:"application/json"})
+      ));
+    } catch {}
+    const gs = sheetOK ? Promise.resolve({ok:true}) :
+      postJSON(SHEET_WEBHOOK, data).then(r => ({ok:r.ok, status:r.status}))
+                                   .catch(err => ({ok:false, err:String(err)}));
+
+    // Wait up to ~1s for both; don’t block user longer than needed
+    const [fsRes, gsRes] = await Promise.race([
+      Promise.allSettled([fs, gs]).then(([a,b]) => [a.value || a, b.value || b]),
+      new Promise(res => setTimeout(()=>res([{ok:true, status:"timeout"},{ok:true, status:"timeout"}]), 900))
+    ]);
+
+    // Log diagnostics so we can see what happened if it fails
+    console.log("Submit diagnostics:", { formsubmit: fsRes, sheet: gsRes });
+
+    // Redirect regardless (don’t strand the user)
+    window.location.href = THANK_YOU_URL;
   });
 </script>
   </div>
