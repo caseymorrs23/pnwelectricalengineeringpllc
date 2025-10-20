@@ -24,7 +24,28 @@ nav a{margin-left:16px}
 .hero-wrap{display:grid;grid-template-columns:1.2fr .8fr;gap:28px;align-items:center}
 .hero h1{line-height:1.2;margin:0 0 10px}
 .hero-ctas{display:flex;gap:12px;margin:12px 0 8px}
-.cred-list{display:flex;gap:16px;flex-wrap:wrap;color:var(--muted);padding:0;margin:10px 0 0}
+.cred-list {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  color: var(--muted);
+  padding: 0;
+  margin: 10px 0 0;
+  list-style: none;   /* removes default bullets */
+}
+.cred-list li {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.cred-list li::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent);
+  opacity: .6;
+}
 .section{padding:56px 0}
 .section.alt{background:var(--panel)}
 .section-title{margin:0 0 18px}
