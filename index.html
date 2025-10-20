@@ -123,29 +123,32 @@
       <button type="submit">Send Request</button>
     </form>
 
-    <script>
-      // Capture UTMs from URL into hidden fields
-      const params = new URLSearchParams(window.location.search);
-      ["utm_source","utm_medium","utm_campaign","utm_term","utm_content"].forEach(k => {
-        const el = document.getElementById(k);
-        if (el && params.has(k)) el.value = params.get(k);
-      });
+   <script>
+  // Capture UTMs from URL into hidden fields
+  const params = new URLSearchParams(window.location.search);
+  ["utm_source","utm_medium","utm_campaign","utm_term","utm_content"].forEach(k => {
+    const el = document.getElementById(k);
+    if (el && params.has(k)) el.value = params.get(k);
+  });
 
-      // Also POST to Google Sheet webhook (won’t block the FormSubmit redirect)
-      document.getElementById("leadForm").addEventListener("submit", function () {
-        const data = Object.fromEntries(new FormData(this).entries());
-        try {
-          fetch("YOUR_WEB_APP_URL", {
-            method: "POST",
-            headers: {"Content-Type": "application/json"},
-            body: JSON.stringify(data),
-            keepalive: true  // helps finish even if the page navigates
-          });
-        } catch (e) {
-          // no-op: email still goes through via FormSubmit
-        }
-      });
-    </script>
+  // Also POST to your Google Sheet webhook (fire-and-forget)
+  document.getElementById("leadForm").addEventListener("submit", function () {
+    const data = Object.fromEntries(new FormData(this).entries());
+    const url = "https://script.google.com/macros/s/AKfycbxs5Mm2ALs_crOZ0e_lKgVER8Cqotu1xys-mYUjwrl0rg0C2jT7xCd_v2vZZtn7KWLX2w/exec";
+    try {
+      // Most reliable while page navigates (no CORS preflight)
+      navigator.sendBeacon?.(url, new Blob([JSON.stringify(data)], { type: "application/json" })) 
+      || fetch(url, {
+           method: "POST",
+           headers: { "Content-Type": "application/json" },
+           body: JSON.stringify(data),
+           keepalive: true
+         });
+    } catch (_) {
+      /* no-op: your FormSubmit email still sends */
+    }
+  });
+</script>
   </div>
 </section>
 
