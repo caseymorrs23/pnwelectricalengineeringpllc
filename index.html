@@ -99,20 +99,13 @@
         <h2 class="section-title">Request a Quote</h2>
         <p>Tell us about your project. You’ll get a fast response with scope, timeline, and pricing.</p>
 
-        <!-- SIMPLE, NON-AJAX FORMSUBMIT FORM -->
+        <!-- FORM POSTS DIRECTLY TO YOUR APPS SCRIPT WEB APP -->
         <form
           id="leadForm"
-          action="https://formsubmit.co/casey-morris@live.com"
+          action="https://script.google.com/macros/s/AKfycbyF7Zxpkqeth1eqqb_9IoKKPU8ec1gMCm2lkabhrWi28IaLhVoCtijTLOoBHQsvEWsT8Q/exec"
           method="POST"
           autocomplete="on"
         >
-          <!-- FormSubmit options -->
-          <input type="hidden" name="_subject" value="New lead — PNW Electrical Engineering">
-          <input type="hidden" name="_template" value="table">
-          <input type="hidden" name="_captcha" value="false">
-          <!-- Redirect to your thank-you page after successful submit -->
-          <input type="hidden" name="_next" value="https://pnwelectricalengineering.com/thankyou.html">
-
           <!-- Honeypot (spam trap) -->
           <input
             type="text"
@@ -140,7 +133,7 @@
             <textarea name="Notes" rows="4"></textarea>
           </label>
 
-          <!-- UTM hidden fields (will be filled by script below) -->
+          <!-- UTM hidden fields (filled by script below) -->
           <input type="hidden" id="utm_source"   name="utm_source">
           <input type="hidden" id="utm_medium"   name="utm_medium">
           <input type="hidden" id="utm_campaign" name="utm_campaign">
@@ -150,11 +143,11 @@
           <button type="submit">Send Request</button>
         </form>
 
-        <!-- Small script ONLY to copy UTM params into the hidden fields -->
+        <!-- Script to copy UTM params into hidden fields -->
         <script>
           (function () {
             var params = new URLSearchParams(window.location.search);
-            ["utm_source","utm_medium","utm_campaign","utm_term","utm_content"].forEach(function(k) {
+            ['utm_source','utm_medium','utm_campaign','utm_term','utm_content'].forEach(function (k) {
               var el = document.getElementById(k);
               if (el && params.has(k)) {
                 el.value = params.get(k);
