@@ -10,18 +10,31 @@
   <link rel="stylesheet" href="assets/css/style.css">
 
   <!-- Google Tag Manager -->
-  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-  })(window,document,'script','dataLayer','GTM-5DQRPTPG');</script>
+  <script>
+    (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-5DQRPTPG');
+  </script>
   <!-- End Google Tag Manager -->
+
+  <!-- Google tag (gtag.js) event -->
+  <script>
+    gtag('event', 'conversion_event_request_quote', {
+      // <event_parameters>
+    });
+  </script>
+  <!-- End Google tag event -->
 </head>
 
 <body>
   <!-- Google Tag Manager (noscript) -->
-  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5DQRPTPG"
-  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <noscript>
+    <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5DQRPTPG"
+      height="0" width="0" style="display:none;visibility:hidden">
+    </iframe>
+  </noscript>
   <!-- End Google Tag Manager (noscript) -->
 
   <header class="site-header">
@@ -73,4 +86,93 @@
             <p>Code compliance checks, load calcs, short-circuit/coordination notes, and AHJ-ready documentation.</p>
           </article>
           <article class="card">
-            <h
+            <h3>Transformer Adequacy Studies</h3>
+            <p>Utility coordination, diversified demand estimates, and upgrade recommendations to de-risk your project.</p>
+          </article>
+          <article class="card">
+            <h3>EV Charging Design</h3>
+            <p>Single-site or multi-site EVSE layouts, panel schedules, and permit submittals for Level 2 / DCFC.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="process" class="section alt">
+      <div class="container">
+        <h2 class="section-title">Simple, Contractor-Friendly Process</h2>
+        <ol class="steps">
+          <li><strong>Share your plans</strong> — PDFs, scope, and address.</li>
+          <li><strong>We review &amp; quote</strong> — timeline and fixed fee.</li>
+          <li><strong>Stamp &amp; submit</strong> — permit-ready package for AHJ.</li>
+        </ol>
+      </div>
+    </section>
+
+    <section id="contact" class="section">
+      <div class="container">
+        <h2 class="section-title">Request a Quote</h2>
+        <p>Tell us about your project. You’ll get a fast response with scope, timeline, and pricing.</p>
+
+        <form
+          id="leadForm"
+          action="https://script.google.com/macros/s/AKfycbwB-wmT2y4DzhD2Jhe_Mth_DSoRtst2MJ9-7fxTICZ8H-liqCJRZUlThcxNFCBcjjq_Xw/exec"
+          method="POST"
+          autocomplete="on"
+        >
+          <input
+            type="text"
+            name="_honey"
+            aria-hidden="true"
+            tabindex="-1"
+            autocomplete="off"
+            style="position:absolute; left:-9999px; width:1px; height:1px; opacity:0;"
+          >
+
+          <label>Name
+            <input name="Name" required autocomplete="name">
+          </label>
+
+          <label>Email
+            <input type="email" name="email" required autocomplete="email">
+          </label>
+
+          <label>Phone
+            <input name="Phone" inputmode="tel" autocomplete="tel">
+          </label>
+
+          <label>Notes
+            <textarea name="Notes" rows="4"></textarea>
+          </label>
+
+          <input type="hidden" id="utm_source" name="utm_source">
+          <input type="hidden" id="utm_medium" name="utm_medium">
+          <input type="hidden" id="utm_campaign" name="utm_campaign">
+          <input type="hidden" id="utm_term" name="utm_term">
+          <input type="hidden" id="utm_content" name="utm_content">
+
+          <button type="submit">Send Request</button>
+        </form>
+
+        <script>
+          (function () {
+            var params = new URLSearchParams(window.location.search);
+            ['utm_source','utm_medium','utm_campaign','utm_term','utm_content']
+              .forEach(function (k) {
+                var el = document.getElementById(k);
+                if (el && params.has(k)) el.value = params.get(k);
+              });
+          })();
+        </script>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-wrap">
+      <p><strong>PNW Electrical Engineering, PLLC</strong> — Licensed Professional Engineer (WA &amp; OR). Website: <a href="https://pnwengineer.com">pnwengineer.com</a></p>
+      <p class="fine">© 2025 PNW Electrical Engineering, PLLC. All rights reserved.</p>
+      <a href="tel:+14437427054">Call: (443) 742-7054</a>
+    </div>
+  </footer>
+</body>
+</html>
