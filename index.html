@@ -10,14 +10,21 @@
   <link rel="stylesheet" href="assets/css/style.css">
 
   <!-- Google Tag Manager -->
-  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-  })(window,document,'script','dataLayer','GTM-5DQRPTPG');</script>
+  <script>
+    (function(w,d,s,l,i){
+      w[l]=w[l]||[];
+      w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});
+      var f=d.getElementsByTagName(s)[0],
+          j=d.createElement(s),
+          dl=l!='dataLayer'?'&l='+l:'';
+      j.async=true;
+      j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;
+      f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-5DQRPTPG');
+  </script>
   <!-- End Google Tag Manager -->
 
-  <!-- gtag() shim (safe with GTM). This prevents "gtag is not defined" and routes events into dataLayer. -->
+  <!-- gtag() shim (safe with GTM) -->
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){ dataLayer.push(arguments); }
@@ -26,8 +33,10 @@
 
 <body>
   <!-- Google Tag Manager (noscript) -->
-  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5DQRPTPG"
-  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <noscript>
+    <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5DQRPTPG"
+      height="0" width="0" style="display:none;visibility:hidden"></iframe>
+  </noscript>
   <!-- End Google Tag Manager (noscript) -->
 
   <header class="site-header">
@@ -106,24 +115,17 @@
         <h2 class="section-title">Request a Quote</h2>
         <p>Tell us about your project. You’ll get a fast response with scope, timeline, and pricing.</p>
 
-        <!-- FORM POSTS DIRECTLY TO YOUR APPS SCRIPT WEB APP -->
+        <!-- FORM POSTS TO APPS SCRIPT -->
         <form
           id="leadForm"
           action="https://script.google.com/macros/s/AKfycbwB-wmT2y4DzhD2Jhe_Mth_DSoRtst2MJ9-7fxTICZ8H-liqCJRZUlThcxNFCBcjjq_Xw/exec"
           method="POST"
           autocomplete="on"
         >
-          <!-- Honeypot (spam trap) -->
-          <input
-            type="text"
-            name="_honey"
-            aria-hidden="true"
-            tabindex="-1"
-            autocomplete="off"
-            style="position:absolute; left:-9999px; top:auto; width:1px; height:1px; opacity:0;"
-          >
+          <!-- Honeypot -->
+          <input type="text" name="_honey" tabindex="-1" autocomplete="off"
+            style="position:absolute; left:-9999px; width:1px; height:1px; opacity:0;">
 
-          <!-- Visible fields -->
           <label>Name
             <input name="Name" required autocomplete="name">
           </label>
@@ -140,7 +142,7 @@
             <textarea name="Notes" rows="4"></textarea>
           </label>
 
-          <!-- UTM hidden fields (filled by script below) -->
+          <!-- UTM hidden fields -->
           <input type="hidden" id="utm_source"   name="utm_source">
           <input type="hidden" id="utm_medium"   name="utm_medium">
           <input type="hidden" id="utm_campaign" name="utm_campaign">
@@ -150,7 +152,11 @@
           <button type="submit">Send Request</button>
         </form>
 
-        <!-- Script to copy UTM params into hidden fields -->
+        <div id="formSuccessMsg" style="display:none; margin-top:12px;">
+          Thanks — we received your request and will respond shortly.
+        </div>
+
+        <!-- Copy UTM params -->
         <script>
           (function () {
             var params = new URLSearchParams(window.location.search);
@@ -163,20 +169,41 @@
           })();
         </script>
 
-        <!-- Fire your exact Google Ads/Google tag event on form submit (Request Quote conversion) -->
+        <!-- Form submit tracking + safe submit -->
         <script>
           (function () {
             var form = document.getElementById('leadForm');
             if (!form) return;
 
-            var fired = false; // prevents double-firing if the browser triggers multiple submit events
-            form.addEventListener('submit', function () {
+            var fired = false;
+
+            form.addEventListener('submit', function (e) {
+              e.preventDefault();
               if (fired) return;
               fired = true;
 
-              <!-- Google tag (gtag.js) event -->
-              gtag('event', 'conversion_event_request_quote', {
-                // <event_parameters>
+              // Fire EXACT event name Google Ads expects
+              gtag('event', 'conversion_event_submit_lead_form', {
+                form_id: 'leadForm',
+                page_path: location.pathname
+              });
+
+              // Submit via fetch so event has time to send
+              var url = form.action;
+              var data = new FormData(form);
+
+              fetch(url, {
+                method: 'POST',
+                mode: 'no-cors',
+                body: data,
+                keepalive: true
+              }).finally(function () {
+                form.reset();
+                var msg = document.getElementById('formSuccessMsg');
+                if (msg) msg.style.display = 'block';
+
+                // Optional redirect if you want later:
+                // window.location.href = '/thank-you.html';
               });
             });
           })();
@@ -187,7 +214,9 @@
 
   <footer class="site-footer">
     <div class="container footer-wrap">
-      <p><strong>PNW Electrical Engineering, PLLC</strong> — Licensed Professional Engineer (WA &amp; OR). Website: <a href="https://pnwengineer.com">pnwengineer.com</a></p>
+      <p><strong>PNW Electrical Engineering, PLLC</strong> — Licensed Professional Engineer (WA &amp; OR). Website:
+        <a href="https://pnwengineer.com">pnwengineer.com</a>
+      </p>
       <p class="fine">© 2025 PNW Electrical Engineering, PLLC. All rights reserved.</p>
       <a href="tel:+14437427054">Call: (443) 742-7054</a>
     </div>
