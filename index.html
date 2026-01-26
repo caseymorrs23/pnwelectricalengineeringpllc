@@ -182,11 +182,6 @@
               if (fired) return;
               fired = true;
 
-              // Fire EXACT event name Google Ads expects
-              gtag('event', 'conversion_event_submit_lead_form', {
-                form_id: 'leadForm',
-                page_path: location.pathname
-              });
 
               // Submit via fetch so event has time to send
               var url = form.action;
