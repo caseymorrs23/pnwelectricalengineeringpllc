@@ -199,10 +199,11 @@
                 form.reset();
                 var msg = document.getElementById('formSuccessMsg');
                 if (msg) msg.style.display = 'block';
-
-                // Optional redirect if you want later:
-                // window.location.href = '/thank-you.html';
-              });
+                // Redirect after allowing tracking pixels to fire (Google/Microsoft)
+                setTimeout(function () {
+                  window.location.href = '/thankyou.html';
+                }, 600);
+});
             });
           })();
         </script>
