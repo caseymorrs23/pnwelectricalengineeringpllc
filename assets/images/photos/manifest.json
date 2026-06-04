@@ -1,0 +1,74 @@
+{
+  "commercial-electrical-room": {
+    "full_webp": "/assets/images/photos/commercial-electrical-room.webp",
+    "full_jpg_fallback": "/assets/images/photos/commercial-electrical-room.jpg",
+    "card_webp": "/assets/images/photos/commercial-electrical-room-card.webp",
+    "card_jpg_fallback": "/assets/images/photos/commercial-electrical-room-card.jpg",
+    "original_png_archive": "/design-source/generated-architect-visuals-originals/commercial-electrical-room-original.png",
+    "full_dimensions": "1600x900",
+    "card_dimensions": "900x506"
+  },
+  "multifamily-completed-apartment": {
+    "full_webp": "/assets/images/photos/multifamily-completed-apartment.webp",
+    "full_jpg_fallback": "/assets/images/photos/multifamily-completed-apartment.jpg",
+    "card_webp": "/assets/images/photos/multifamily-completed-apartment-card.webp",
+    "card_jpg_fallback": "/assets/images/photos/multifamily-completed-apartment-card.jpg",
+    "original_png_archive": "/design-source/generated-architect-visuals-originals/multifamily-completed-apartment-original.png",
+    "full_dimensions": "1600x900",
+    "card_dimensions": "900x506"
+  },
+  "ev-charging-completed-installation": {
+    "full_webp": "/assets/images/photos/ev-charging-completed-installation.webp",
+    "full_jpg_fallback": "/assets/images/photos/ev-charging-completed-installation.jpg",
+    "card_webp": "/assets/images/photos/ev-charging-completed-installation-card.webp",
+    "card_jpg_fallback": "/assets/images/photos/ev-charging-completed-installation-card.jpg",
+    "original_png_archive": "/design-source/generated-architect-visuals-originals/ev-charging-completed-installation-original.png",
+    "full_dimensions": "1600x900",
+    "card_dimensions": "900x506"
+  },
+  "generator-ats-room": {
+    "full_webp": "/assets/images/photos/generator-ats-room.webp",
+    "full_jpg_fallback": "/assets/images/photos/generator-ats-room.jpg",
+    "card_webp": "/assets/images/photos/generator-ats-room-card.webp",
+    "card_jpg_fallback": "/assets/images/photos/generator-ats-room-card.jpg",
+    "original_png_archive": "/design-source/generated-architect-visuals-originals/generator-ats-room-original.png",
+    "full_dimensions": "1600x900",
+    "card_dimensions": "900x506"
+  },
+  "commercial-tenant-improvement": {
+    "full_webp": "/assets/images/photos/commercial-tenant-improvement.webp",
+    "full_jpg_fallback": "/assets/images/photos/commercial-tenant-improvement.jpg",
+    "card_webp": "/assets/images/photos/commercial-tenant-improvement-card.webp",
+    "card_jpg_fallback": "/assets/images/photos/commercial-tenant-improvement-card.jpg",
+    "original_png_archive": "/design-source/generated-architect-visuals-originals/commercial-tenant-improvement-original.png",
+    "full_dimensions": "1600x900",
+    "card_dimensions": "900x506"
+  },
+  "service-upgrade-utility-equipment": {
+    "full_webp": "/assets/images/photos/service-upgrade-utility-equipment.webp",
+    "full_jpg_fallback": "/assets/images/photos/service-upgrade-utility-equipment.jpg",
+    "card_webp": "/assets/images/photos/service-upgrade-utility-equipment-card.webp",
+    "card_jpg_fallback": "/assets/images/photos/service-upgrade-utility-equipment-card.jpg",
+    "original_png_archive": "/design-source/generated-architect-visuals-originals/service-upgrade-utility-equipment-original.png",
+    "full_dimensions": "1600x900",
+    "card_dimensions": "900x506"
+  },
+  "elevator-machine-room": {
+    "full_webp": "/assets/images/photos/elevator-machine-room.webp",
+    "full_jpg_fallback": "/assets/images/photos/elevator-machine-room.jpg",
+    "card_webp": "/assets/images/photos/elevator-machine-room-card.webp",
+    "card_jpg_fallback": "/assets/images/photos/elevator-machine-room-card.jpg",
+    "original_png_archive": "/design-source/generated-architect-visuals-originals/elevator-machine-room-original.png",
+    "full_dimensions": "1600x900",
+    "card_dimensions": "900x506"
+  },
+  "rooftop-solar-electrical-infrastructure": {
+    "full_webp": "/assets/images/photos/rooftop-solar-electrical-infrastructure.webp",
+    "full_jpg_fallback": "/assets/images/photos/rooftop-solar-electrical-infrastructure.jpg",
+    "card_webp": "/assets/images/photos/rooftop-solar-electrical-infrastructure-card.webp",
+    "card_jpg_fallback": "/assets/images/photos/rooftop-solar-electrical-infrastructure-card.jpg",
+    "original_png_archive": "/design-source/generated-architect-visuals-originals/rooftop-solar-electrical-infrastructure-original.png",
+    "full_dimensions": "1600x900",
+    "card_dimensions": "900x506"
+  }
+}

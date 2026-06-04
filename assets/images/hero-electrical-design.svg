@@ -1,0 +1,78 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="760" viewBox="0 0 1200 760" role="img" aria-labelledby="title desc">
+  <title id="title">Permit-ready electrical design visual</title>
+  <desc id="desc">Professional electrical engineering visual asset for PNW Electrical Engineering.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#10243a"/>
+      <stop offset="0.55" stop-color="#1f4f77"/>
+      <stop offset="1" stop-color="#e7f0f7"/>
+    </linearGradient>
+    <linearGradient id="panel" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffffff" stop-opacity="0.97"/>
+      <stop offset="1" stop-color="#dce8f2" stop-opacity="0.94"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0.22" cy="0.18" r="0.95">
+      <stop offset="0" stop-color="#ffffff" stop-opacity="0.34"/>
+      <stop offset="0.45" stop-color="#ffffff" stop-opacity="0.08"/>
+      <stop offset="1" stop-color="#ffffff" stop-opacity="0"/>
+    </radialGradient>
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M40 0H0V40" fill="none" stroke="#ffffff" stroke-opacity="0.08" stroke-width="1"/>
+    </pattern>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="18" stdDeviation="18" flood-color="#000000" flood-opacity="0.22"/>
+    </filter>
+  </defs>
+  <rect width="1200" height="760" rx="34" fill="url(#bg)"/>
+  <rect width="1200" height="760" rx="34" fill="url(#grid)"/>
+  <rect width="1200" height="760" rx="34" fill="url(#glow)"/>
+  
+  <path d="M126 604C260 472 367 462 512 505C671 552 783 533 916 420C997 351 1064 338 1126 354" fill="none" stroke="#ffffff" stroke-opacity="0.32" stroke-width="6"/>
+  <g filter="url(#shadow)" transform="translate(118.0,250) scale(1.05)">
+          <rect x="0" y="0" width="112" height="300" rx="12" fill="url(#panel)" stroke="#ffffff" stroke-opacity="0.45"/>
+          <rect x="16" y="24" width="80" height="34" rx="6" fill="#153752" opacity="0.88"/>
+          <g stroke="#8da4b8" stroke-width="5" stroke-linecap="round">
+            <path d="M23 92H89"/><path d="M23 122H89"/><path d="M23 152H89"/><path d="M23 182H89"/><path d="M23 212H89"/>
+          </g>
+          <circle cx="37" cy="258" r="9" fill="#c9902f"/><circle cx="72" cy="258" r="9" fill="#1f4f77"/>
+        </g>
+<g filter="url(#shadow)" transform="translate(270.25,250) scale(1.05)">
+          <rect x="0" y="0" width="112" height="300" rx="12" fill="url(#panel)" stroke="#ffffff" stroke-opacity="0.45"/>
+          <rect x="16" y="24" width="80" height="34" rx="6" fill="#153752" opacity="0.88"/>
+          <g stroke="#8da4b8" stroke-width="5" stroke-linecap="round">
+            <path d="M23 92H89"/><path d="M23 122H89"/><path d="M23 152H89"/><path d="M23 182H89"/><path d="M23 212H89"/>
+          </g>
+          <circle cx="37" cy="258" r="9" fill="#c9902f"/><circle cx="72" cy="258" r="9" fill="#1f4f77"/>
+        </g>
+<g filter="url(#shadow)" transform="translate(422.5,250) scale(1.05)">
+          <rect x="0" y="0" width="112" height="300" rx="12" fill="url(#panel)" stroke="#ffffff" stroke-opacity="0.45"/>
+          <rect x="16" y="24" width="80" height="34" rx="6" fill="#153752" opacity="0.88"/>
+          <g stroke="#8da4b8" stroke-width="5" stroke-linecap="round">
+            <path d="M23 92H89"/><path d="M23 122H89"/><path d="M23 152H89"/><path d="M23 182H89"/><path d="M23 212H89"/>
+          </g>
+          <circle cx="37" cy="258" r="9" fill="#c9902f"/><circle cx="72" cy="258" r="9" fill="#1f4f77"/>
+        </g>
+<g filter="url(#shadow)" transform="translate(574.75,250) scale(1.05)">
+          <rect x="0" y="0" width="112" height="300" rx="12" fill="url(#panel)" stroke="#ffffff" stroke-opacity="0.45"/>
+          <rect x="16" y="24" width="80" height="34" rx="6" fill="#153752" opacity="0.88"/>
+          <g stroke="#8da4b8" stroke-width="5" stroke-linecap="round">
+            <path d="M23 92H89"/><path d="M23 122H89"/><path d="M23 152H89"/><path d="M23 182H89"/><path d="M23 212H89"/>
+          </g>
+          <circle cx="37" cy="258" r="9" fill="#c9902f"/><circle cx="72" cy="258" r="9" fill="#1f4f77"/>
+        </g>
+  <g filter="url(#shadow)" transform="translate(726 160)">
+    <rect width="330" height="430" rx="22" fill="#ffffff" opacity="0.96"/>
+    <rect x="34" y="40" width="262" height="52" rx="10" fill="#eef4f8"/>
+    <g fill="none" stroke="#1f4f77" stroke-width="6" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M72 151h58v70h90v78h56"/>
+      <path d="M71 151v184h205"/>
+      <path d="M130 221v114"/>
+      <path d="M220 299v36"/>
+    </g>
+    <g fill="#c9902f"><circle cx="72" cy="151" r="12"/><circle cx="130" cy="221" r="12"/><circle cx="220" cy="299" r="12"/><circle cx="276" cy="299" r="12"/></g>
+    <g stroke="#8da4b8" stroke-width="4" opacity="0.9"><path d="M52 383h230"/><path d="M52 408h158"/></g>
+  </g>
+  <text x="90" y="105" fill="#ffffff" font-family="Arial, sans-serif" font-size="36" font-weight="700">Commercial Electrical Engineering</text>
+  <text x="92" y="146" fill="#d9ecff" font-family="Arial, sans-serif" font-size="22">One-lines • load calculations • permit drawings</text>
+
+</svg>
