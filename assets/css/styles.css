@@ -24,6 +24,10 @@ img { max-width: 100%; height: auto; }
 .brand { display: flex; align-items: center; gap: 0.8rem; color: var(--ink); }
 .brand:hover { text-decoration: none; }
 .brand-mark { display: inline-grid; place-items: center; width: 52px; height: 52px; border-radius: 14px; background: var(--brand); color: var(--white); font-weight: 800; letter-spacing: 0.03em; }
+.brand-logo { display: block; width: 56px; height: 56px; border-radius: 50%; object-fit: cover; background: var(--white); box-shadow: 0 8px 18px rgba(21, 55, 82, 0.14); flex: 0 0 auto; }
+.footer-brand { display: flex; align-items: center; gap: 0.85rem; margin-bottom: 0.7rem; }
+.footer-logo { width: 54px; height: 54px; border-radius: 50%; object-fit: cover; background: var(--white); box-shadow: 0 8px 18px rgba(0, 0, 0, 0.18); flex: 0 0 auto; }
+.footer-brand h2 { margin: 0; }
 .brand small { display: block; color: var(--muted); font-size: 0.82rem; font-weight: 600; }
 .nav-links { display: flex; align-items: center; gap: 1rem; }
 .nav-links a { color: var(--ink); font-weight: 700; font-size: 0.95rem; }
